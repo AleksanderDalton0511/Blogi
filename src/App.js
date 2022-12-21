@@ -1,5 +1,5 @@
 import { ActivityIndicator, FlatList, StyleSheet, Text, View, Image, TextInput, Button, SafeAreaView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation  } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 
@@ -115,6 +115,7 @@ const BlogPostCommentPreview = ({ name, comment }) => {
 
 
 const BlogPostDetails = ({ id, title, content, imageUrl }) => {
+    const navigation = useNavigation();
     console.log(id);
     console.log('http://localhost:3000/post/' + id + '/comments');
     const [data, setData] = useState([]);
@@ -194,6 +195,10 @@ const BlogPostDetails = ({ id, title, content, imageUrl }) => {
             <Text>Comment:</Text>
             <TextInput style={{ border: "thin solid black" }} value={comment} onChangeText={onChangeComment} />
             <Button onPress={() => sendComment()} title="Send comment " />
+            <Button
+        title="Go home"
+        onPress={() => navigation.navigate('Home')}
+      />
         </SafeAreaView>
     );
 };
